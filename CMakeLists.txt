@@ -142,14 +142,14 @@ find_library(LIBKVASER NAMES libcanlib.so PATHS ${KVASER_PATH})
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
- add_executable(${PROJECT_NAME}_Testnode src/lc_xsdrive_Testnode.cpp src/XsDriveCAN.cpp)
- target_link_libraries(${PROJECT_NAME}_Testnode ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER}
-)
-
+add_executable(${PROJECT_NAME}_Testnode src/lc_xsdrive_Testnode.cpp src/XsDriveCAN.cpp)
+target_link_libraries(${PROJECT_NAME}_Testnode ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER})
 
 add_executable(${PROJECT_NAME}_xdToRos src/xsDriveTorRos.cpp src/XsDriveCAN.cpp)
- target_link_libraries(${PROJECT_NAME}_xdToRos ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER}
-)
+target_link_libraries(${PROJECT_NAME}_xdToRos ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER})
+
+add_executable(${PROJECT_NAME}_leverToGazebo src/leverToGazebo.cpp )
+target_link_libraries(${PROJECT_NAME}_leverToGazebo ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER})
 #############
 ## Install ##
 #############

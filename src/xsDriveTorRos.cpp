@@ -24,6 +24,7 @@ uint8_t btn5;
 uint8_t btn6;
 uint8_t btn7;
 
+static bool buttonState1 = false;
 
 
 // %EndTag(CALLBACK)%
@@ -88,7 +89,15 @@ int main(int argc, char **argv)
          XsDriveobj.getBtnMsg(hnd,btnID,btnState);
 
         //lever1Msg.data=count;
-        leverArray.data[0]=leverCmd[0]; buttonArray.data[0]=(uint8_t)btnState[0];
+        if(btnState[0]==1){
+          buttonState1=!buttonState1;
+        }
+
+    
+
+
+
+        leverArray.data[0]=leverCmd[0]; buttonArray.data[0]=(uint8_t)buttonState1;
         leverArray.data[1]=leverCmd[1]; buttonArray.data[1]=(uint8_t)btnState[1];
         leverArray.data[2]=leverCmd[2]; buttonArray.data[2]=(uint8_t)btnState[2];
         leverArray.data[3]=leverCmd[3]; buttonArray.data[3]=(uint8_t)btnState[3];
