@@ -1,0 +1,7 @@
+
+<launch>
+
+    <node pkg="lc_xsdrive" type="lc_xsdrive_xdToRos" name="lc_xsdrive_xdToRos">   </node>
+    <node pkg="lc_xsdrive" type="lc_xsdrive_leverToRiviz" name="lc_xsdrive_leverToRiviz"></node>
+
+</launch>
