@@ -121,7 +121,19 @@ void XsDriveCAN::getLeverMsg(canHandle hnd,long id,int (&msgOut)[8]){
           if ((int)msg[6]>100){ lever7 = (int)msg[6]-256;}
           if ((int)msg[7]>100){ lever8 = (int)msg[7]-256;}
           // std::cout<<"Id: "<<id<<" dlc= "<<dlc<<" Msg: "<<lever1<<" , "<<lever2<<" , "<<lever3<<" , "<<lever4<<" , "<<lever5<<" , "<<lever6<<" , "<< lever7<<" , "<<lever8<<" , timeStamp: "<<timestamp<<"\n";
+        }else
+        {
+          
+          lever1=msgOut[0];
+          lever2=msgOut[1];
+          lever3=msgOut[2];
+          lever4=msgOut[3];
+          lever5=msgOut[4];
+          lever6=msgOut[5];
+          lever7=msgOut[6];
+          lever8=msgOut[7];
         }
+        
       }
     }
      else if (stat != canERR_NOMSG){

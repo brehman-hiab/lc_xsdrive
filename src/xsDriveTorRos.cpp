@@ -75,14 +75,14 @@ int main(int argc, char **argv)
   int count = 0;
 	while (ros::ok()) {
          
-         leverCmd[0]=leverCmd[0];
-         leverCmd[1]=leverCmd[1];
-         leverCmd[2]=leverCmd[2];
-         leverCmd[3]=leverCmd[3];
-         leverCmd[4]=leverCmd[4];
-         leverCmd[5]=leverCmd[5];
-         leverCmd[6]=leverCmd[6];
-         leverCmd[7]=leverCmd[7];
+        // leverCmd[0]=leverCmd[0];
+        // leverCmd[1]=leverCmd[1];
+        // leverCmd[2]=leverCmd[2];
+        // leverCmd[3]=leverCmd[3];
+        // leverCmd[4]=leverCmd[4];
+        // leverCmd[5]=leverCmd[5];
+        // leverCmd[6]=leverCmd[6];
+        // leverCmd[7]=leverCmd[7];
 
          XsDriveobj.txAliveMsg(hnd,stat);
          XsDriveobj.getLeverMsg(hnd,leverID,leverCmd);

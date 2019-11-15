@@ -150,6 +150,10 @@ target_link_libraries(${PROJECT_NAME}_xdToRos ${catkin_LIBRARIES} ${Boost_LIBRAR
 
 add_executable(${PROJECT_NAME}_leverToGazebo src/leverToGazebo.cpp )
 target_link_libraries(${PROJECT_NAME}_leverToGazebo ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER})
+
+
+add_executable(${PROJECT_NAME}_leverToRiviz src/leverToRiviz.cpp )
+target_link_libraries(${PROJECT_NAME}_leverToRiviz ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER})
 #############
 ## Install ##
 #############
