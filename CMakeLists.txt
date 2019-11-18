@@ -154,6 +154,10 @@ target_link_libraries(${PROJECT_NAME}_leverToGazebo ${catkin_LIBRARIES} ${Boost_
 
 add_executable(${PROJECT_NAME}_leverToRiviz src/leverToRiviz.cpp )
 target_link_libraries(${PROJECT_NAME}_leverToRiviz ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER})
+
+add_executable(${PROJECT_NAME}_simulinkToGazebo src/simulinkToGazebo.cpp )
+target_link_libraries(${PROJECT_NAME}_simulinkToGazebo ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER})
+
 #############
 ## Install ##
 #############
