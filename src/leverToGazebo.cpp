@@ -207,7 +207,7 @@ int main(int argc, char **argv)
         slewAngleRef.data = ramped;   
              
 
-        ramp(gain, alphaBias,ALPHA_MIN,ALPHA_MAX, lever2, alpha_count,ramped);    
+        ramp((gain+5000), alphaBias,ALPHA_MIN,ALPHA_MAX, lever2, alpha_count,ramped);    
         alphaBias = ramped;
         alphaAngleRef.data = ramped;     
         

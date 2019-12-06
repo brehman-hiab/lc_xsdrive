@@ -216,6 +216,14 @@ int main(int argc, char **argv)
           rStabExtLeg_pub.publish(rStabEXTLegRef);     
           lStabExt_pub.publish(lStabEXTRef);     
           lStabExtLeg_pub.publish(lStabEXTLegRef); 
+
+            slewBias = _slewAngleRef.data;
+            alphaBias = _alphaAngleRef.data;
+            betaBias = _betaAngleRef.data;
+            extBias = _ext1Ref.data+_ext2Ref.data+
+                        _ext3Ref.data+_ext4Ref.data+
+                        _ext5Ref.data+_ext6Ref.data;
+                        
     }else{
       if (btn1==1)
         {

@@ -145,6 +145,9 @@ find_library(LIBKVASER NAMES libcanlib.so PATHS ${KVASER_PATH})
 add_executable(${PROJECT_NAME}_Testnode src/lc_xsdrive_Testnode.cpp src/XsDriveCAN.cpp)
 target_link_libraries(${PROJECT_NAME}_Testnode ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER})
 
+add_executable(${PROJECT_NAME}_rosToCan src/rosToCan.cpp src/XsDriveCAN.cpp)
+target_link_libraries(${PROJECT_NAME}_rosToCan ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER})
+
 add_executable(${PROJECT_NAME}_xdToRos src/xsDriveTorRos.cpp src/XsDriveCAN.cpp)
 target_link_libraries(${PROJECT_NAME}_xdToRos ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER})
 
@@ -157,6 +160,11 @@ target_link_libraries(${PROJECT_NAME}_leverToRiviz ${catkin_LIBRARIES} ${Boost_L
 
 add_executable(${PROJECT_NAME}_simulinkToGazebo src/simulinkToGazebo.cpp )
 target_link_libraries(${PROJECT_NAME}_simulinkToGazebo ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER})
+
+
+
+add_executable(${PROJECT_NAME}_simulinkToRviz src/simulinkToRviz.cpp )
+target_link_libraries(${PROJECT_NAME}_simulinkToRviz ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LIBKVASER})
 
 #############
 ## Install ##

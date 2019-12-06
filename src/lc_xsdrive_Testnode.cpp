@@ -10,6 +10,7 @@ int main(int argc, char* argv[]){
     int channel_number = 0;
     long leverID=1280;
     int leverCmd[8]={0,0,0,0,0,0,0,0};
+    uint16_t lenMsg[8]={1,2,0,0,0,0,0,0};
     long btnID=1296;
     bool btnState[8]={false,false,false,false,false,false,false,false};
     XsDriveCAN XsDriveobj;
@@ -29,7 +30,8 @@ int main(int argc, char* argv[]){
         leverCmd[7]=leverCmd[7]; btnState[7]=btnState[7];
 
 
-        XsDriveobj.txAliveMsg(hnd,stat);       
+        XsDriveobj.txAliveMsg(hnd,stat);
+        XsDriveobj.txLenSensorMsg(hnd,stat,(long)1200,lenMsg);
         XsDriveobj.Check("canWriteSync", stat);
         // XsDriveobj.printRxMsg(hnd);      
         // XsDriveobj.getLeverMsg(hnd,leverID,leverCmd);

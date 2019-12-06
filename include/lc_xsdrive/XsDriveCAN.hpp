@@ -16,6 +16,7 @@ public:
     void openCanChannel(canHandle&hnd, canStatus&stat,int channelNumber);
     void closeCanChannel(canHandle&hnd, canStatus&stat);
     void txAliveMsg(canHandle&hnd, canStatus&stat);
+    void txLenSensorMsg(canHandle&hnd, canStatus&stat,long id,uint16_t (msgIn)[8]);
     void printRxMsg(canHandle hnd);
     void getLeverMsg(canHandle hnd,long id,int (&msgOut)[8]);
     void getBtnMsg(canHandle hnd,long id,bool (&msgOut)[8]);

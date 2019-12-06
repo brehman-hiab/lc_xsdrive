@@ -64,6 +64,19 @@ void XsDriveCAN::txAliveMsg(canHandle&hnd, canStatus&stat){
 
 }
 
+void XsDriveCAN::txLenSensorMsg(canHandle&hnd, canStatus&stat,long id,uint16_t (msgIn)[8]){
+    
+    unsigned char msg[8] = {0,0,0,0,0,0,0,0};
+    for (int i=0 ; i<8 ; i++){
+          msg[i] =  (unsigned char)msgIn[i];
+    }
+    stat = canWrite(hnd, id, msg, 8, 0);
+
+    Check("canWrite", stat);
+    stat = canWriteSync(hnd, 100);
+
+}
+
 void XsDriveCAN::printRxMsg(canHandle hnd){
     dumpMessageLoop(hnd);
     

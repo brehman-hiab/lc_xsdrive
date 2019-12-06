@@ -291,8 +291,10 @@ int main(int argc, char **argv)
       }else
       {
         ramp(gain, slewBias, SLEW_MIN,SLEW_MAX, lever1, slew_count, ramped);    
-        slewBias = ramped;
+        slewBias = ramped;        
         slewAngleRef.data = ramped;   
+        
+        
              
 
         ramp(gain, alphaBias,ALPHA_MIN,ALPHA_MAX, lever2, alpha_count,ramped);    
@@ -302,6 +304,7 @@ int main(int argc, char **argv)
 
         ramp(gain, betaBias,BETA_MIN,BETA_MAX,lever3, beta_count,ramped);    
         betaBias = ramped;
+
         betaAngleRef.data = ramped;
         
 
@@ -327,6 +330,16 @@ int main(int argc, char **argv)
         ext5Ref.data=ext5/1;
         ext6Ref.data=ext6/1;
 
+
+        if (controlMode==1)
+        {
+            slewBias = _slewAngleRef.data;
+            alphaBias = _alphaAngleRef.data;
+            betaBias = _betaAngleRef.data;
+            extBias = _ext1Ref.data+_ext2Ref.data+
+                        _ext3Ref.data+_ext4Ref.data+
+                        _ext5Ref.data+_ext6Ref.data;
+        }
         
 
          if (lever1==(double)0)
@@ -368,11 +381,25 @@ int main(int argc, char **argv)
 	    joint_state.position[6]  =_ext4Ref.data;
 	    joint_state.position[7]  =_ext5Ref.data;
 	    joint_state.position[8]  =_ext6Ref.data;
-	    
         joint_state.position[9]  =_rStabEXTRef.data ;
 	    joint_state.position[10] =_rStabEXTLegRef.data;
 	    joint_state.position[11] =_lStabEXTRef.data ;
 	    joint_state.position[12] =_lStabEXTLegRef.data;
+
+        // slewAngleRef.data   =
+        // alphaAngleRef.data  =
+        // betaAngleRef.data   =
+        // ext1Ref.data        =
+        // ext2Ref.data        =
+        // ext3Ref.data        =
+        // ext4Ref.data        =
+        // ext5Ref.data        =
+        // ext6Ref.data        =
+
+        // rStabEXTRef.data    =
+        // rStabEXTLegRef.data =
+        // lStabEXTRef.data    =
+        // lStabEXTLegRef.data =
 
         std::cout<<"controllMode"<<controlMode<<"sss"<<joint_state.position[1]<<"\n";
 
