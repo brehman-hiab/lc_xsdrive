@@ -15,10 +15,17 @@ double slewAngle;
 
 
 void getLenMsg( double length,uint16_t (&lenMsg)[8]);
+void getSlewToLenMsg( double length,uint16_t (&lenMsg)[8]);
 void callback(const sensor_msgs::JointStateConstPtr& msg)
 {
 
-	slewAngle  =(double)msg->position[0];
+	slewAngle  =(double)msg->position[20]; // this needs to be updated if added more joints, this is last in joint state topic
+
+
+
+
+
+
 	// joint_state.position[1]  =msg->position[1];
 	// joint_state.position[2]  =msg->position[2];
  
@@ -32,15 +39,16 @@ void callback(const sensor_msgs::JointStateConstPtr& msg)
 	// joint_state.position[8]  =msg->position[8];
 
 
-	len1 =(double)msg->position[13]*10000; 
-	len2 =(double)msg->position[14]*10000;
-	len3 =(double)msg->position[15]*10000;
-	len4 =(double)msg->position[16]*10000;
+	len1 =(double)msg->position[12]*10000; //LEN_MLLL
+	len2 =(double)msg->position[13]*10000; //LEN_MLLE
+	len3 =(double)msg->position[14]*10000; //LEN_MRLL
+	len4 =(double)msg->position[15]*10000; //LEN_MRLE
 
-    // std::cout<<" len1 = "<<len1
-    //     <<" len2 = "<<len2
-    //     <<" len3 = "<<len3
-    //     <<" len4 = "<<len4
+    // std::cout
+    //     <<" len1 = "<<len1
+    //     <<"\t len2 = "<<len2
+    //     <<"\t len3 = "<<len3
+    //     <<"\t len4 = "<<len4
     //     <<"\n";
 	// joint_state.position[13] = msg->position[13];
 	// joint_state.position[14] = msg->position[14];
@@ -103,19 +111,17 @@ int main(int argc, char **argv)
          
 
 
-        // XsDriveobj.txAliveMsg(hnd,stat);
-        std::cout<<" len1ID="<<len1ID<<" ";
-        getLenMsg(len3,lenMsg);
-        std::cout<<len1<<" lenMsg = ";
-        for(int i=0;i<8;i++){
-            std::cout<<" "<<lenMsg[i]<<" ";
-        }
-         
-        std::cout<<"\n";
-        XsDriveobj.txLenSensorMsg(hnd,stat,len1ID,lenMsg);
-        getLenMsg(len4,lenMsg);
-        XsDriveobj.txLenSensorMsg(hnd,stat,len2ID,lenMsg);
+        getSlewToLenMsg(slewAngle,lenMsg);
         XsDriveobj.txLenSensorMsg(hnd,stat,lenSlewID,lenMsg);
+
+
+        getLenMsg(len2,lenMsg); //MLLE
+        XsDriveobj.txLenSensorMsg(hnd,stat,len1ID,lenMsg);
+
+
+        getLenMsg(len4,lenMsg); //MRLE
+        XsDriveobj.txLenSensorMsg(hnd,stat,len2ID,lenMsg);
+        
 
         ros::spinOnce();
 	    loop_rate.sleep();
@@ -127,41 +133,39 @@ int main(int argc, char **argv)
 
   return 0;
 }
+void getSlewToLenMsg( double slew,uint16_t (&lenMsg)[8]){
+
+    double uMin = 41.5;
+    double uMax = 830;
+
+    double angMin = -203;
+    double angMax = 203;
+
+    double length = ((((slew*180/3.1416-angMin)*(uMax-uMin))/(angMax-angMin))+uMin)*10;
+
+    std::cout<<"slew[deg]="<<slew*180/3.1416<<"    converted="<<length<<"\n";
+    
+    
+    lenMsg[0] = (uint16_t)length & 0xFF; 
+    lenMsg[1] = (((uint16_t)length & 0xFF00)>>8); 
+    lenMsg[2] = 0; 
+    lenMsg[3] = 0; 
+    lenMsg[4] = 0; 
+    lenMsg[5] = 0; 
+    lenMsg[6] = 0; 
+    lenMsg[7] = 0; 
+}
 
 void getLenMsg( double length,uint16_t (&lenMsg)[8]){
-         if(length<255*1000){
-             lenMsg[0] = (uint16_t)length/10000; 
-             lenMsg[1] = 0; 
-             lenMsg[2] = 0; 
-             lenMsg[3] = 0; 
-             lenMsg[4] = 0; 
-             lenMsg[5] = 0; 
-             lenMsg[6] = 0; 
-             lenMsg[7] = 0; 
 
-         }else if(length>255*1000)
-         {
-             lenMsg[0] =(uint16_t)255; 
-             lenMsg[1] = (uint16_t)length; 
-             lenMsg[2] = 0; 
-             lenMsg[3] = 0; 
-             lenMsg[4] = 0; 
-             lenMsg[5] = 0; 
-             lenMsg[6] = 0; 
-             lenMsg[7] = 0;
-         }else
-         {
-             lenMsg[0] =(uint16_t)255; 
-             lenMsg[1] = (uint16_t)length; 
-             lenMsg[2] = 0; 
-             lenMsg[3] = 0; 
-             lenMsg[4] = 0; 
-             lenMsg[5] = 0; 
-             lenMsg[6] = 0; 
-             lenMsg[7] = 0;
-         }
-
-
+        lenMsg[0] = (uint16_t)length & 0xFF; 
+        lenMsg[1] = (((uint16_t)length & 0xFF00)>>8); 
+        lenMsg[2] = 0; 
+        lenMsg[3] = 0; 
+        lenMsg[4] = 0; 
+        lenMsg[5] = 0; 
+        lenMsg[6] = 0; 
+        lenMsg[7] = 0; 
 }
 
 
