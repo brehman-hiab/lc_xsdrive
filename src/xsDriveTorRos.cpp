@@ -25,7 +25,8 @@ uint8_t btn6;
 uint8_t btn7;
 
 static bool buttonState1 = false;
-
+static bool buttonState2 = false;
+static bool buttonState3 = false;
 
 // %EndTag(CALLBACK)%
 
@@ -73,6 +74,8 @@ int main(int argc, char **argv)
   
   ros::Rate loop_rate(1000);
   int count = 0;
+  int btn2Toggel = 0;
+  int btn3Toggel = 0;
 	while (ros::ok()) {
          
         // leverCmd[0]=leverCmd[0];
@@ -88,18 +91,25 @@ int main(int argc, char **argv)
          XsDriveobj.getLeverMsg(hnd,leverID,leverCmd);
          XsDriveobj.getBtnMsg(hnd,btnID,btnState);
 
-        //lever1Msg.data=count;
+        
         if(btnState[0]==1){
           buttonState1=!buttonState1;
         }
+        if(btnState[1]==1){
+          buttonState2=!buttonState2;
+        }
+        if(btnState[2]==1){
+          buttonState3=!buttonState3;
+        }
+        
 
     
 
 
 
         leverArray.data[0]=leverCmd[0]; buttonArray.data[0]=(uint8_t)buttonState1;
-        leverArray.data[1]=leverCmd[1]; buttonArray.data[1]=(uint8_t)btnState[1];
-        leverArray.data[2]=leverCmd[2]; buttonArray.data[2]=(uint8_t)btnState[2];
+        leverArray.data[1]=leverCmd[1]; buttonArray.data[1]=(uint8_t)buttonState2;
+        leverArray.data[2]=leverCmd[2]; buttonArray.data[2]=(uint8_t)buttonState3;
         leverArray.data[3]=leverCmd[3]; buttonArray.data[3]=(uint8_t)btnState[3];
         leverArray.data[4]=leverCmd[4]; buttonArray.data[4]=(uint8_t)btnState[4];
         leverArray.data[5]=leverCmd[5]; buttonArray.data[5]=(uint8_t)btnState[5];
