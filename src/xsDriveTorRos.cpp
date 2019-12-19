@@ -27,7 +27,8 @@ uint8_t btn7;
 static bool buttonState1 = false;
 static bool buttonState2 = false;
 static bool buttonState3 = false;
-
+static bool buttonState4 = false;
+static bool buttonState5 = false;
 // %EndTag(CALLBACK)%
 
 int main(int argc, char **argv)
@@ -102,14 +103,20 @@ int main(int argc, char **argv)
           buttonState3=!buttonState3;
         }
         
+        if(btnState[3]==1){
+          buttonState4=!buttonState4;
+        }
+        if(btnState[4]==1){
+          buttonState5=!buttonState5;
+        }
 
     
 
 
 
         leverArray.data[0]=leverCmd[0]; buttonArray.data[0]=(uint8_t)buttonState1;
-        leverArray.data[1]=leverCmd[1]; buttonArray.data[1]=(uint8_t)buttonState2;
-        leverArray.data[2]=leverCmd[2]; buttonArray.data[2]=(uint8_t)buttonState3;
+        leverArray.data[1]=leverCmd[1]; buttonArray.data[1]=(uint8_t)btnState[1];
+        leverArray.data[2]=leverCmd[2]; buttonArray.data[2]=(uint8_t)btnState[2];
         leverArray.data[3]=leverCmd[3]; buttonArray.data[3]=(uint8_t)btnState[3];
         leverArray.data[4]=leverCmd[4]; buttonArray.data[4]=(uint8_t)btnState[4];
         leverArray.data[5]=leverCmd[5]; buttonArray.data[5]=(uint8_t)btnState[5];
