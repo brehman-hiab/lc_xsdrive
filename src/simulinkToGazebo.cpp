@@ -274,7 +274,7 @@ int main(int argc, char **argv)
           // std::cout<<"Btn 1 is active"<<"\n";
         }else
         {
-          ramp(gain, slewBias, SLEW_MIN,SLEW_MAX, lever1, slew_count, ramped);    
+          ramp(gain, slewBias, SLEW_MIN,SLEW_MAX, lever1, slew_count/12, ramped);    
           slewBias = ramped;
           slewAngleRef.data = ramped;   
 
